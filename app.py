@@ -3,7 +3,7 @@ from cassandra.cluster import Cluster
 import requests
 import sys
 
-from reportlab.pdfgen import canvas
+#from reportlab.pdfgen import canvas
 
 cluster = Cluster(['cassandra'])
 #cluster = Cluster(['127.0.0.1'])
@@ -66,35 +66,35 @@ def delete_centre(id):
     session.execute("""DELETE FROM enrollmykid.centres WHERE id={}""".format(id))
     return jsonify({'message':'delete successfull'})
 
-@app.route('/save/<int:id>')
-def save_centre(id):
-    centre = None
-    rows = session.execute("""SELECT * FROM enrollmykid.centres WHERE id=%(id)s""",{'id': id})
-    for row in rows:
+# @app.route('/save/<int:id>')
+# def save_centre(id):
+#     centre = None
+#     rows = session.execute("""SELECT * FROM enrollmykid.centres WHERE id=%(id)s""",{'id': id})
+#     for row in rows:
 
-        centre = {'id': row.id, 'service_approval_number': row.serviceapprovalnumber, 'provider_approval_number': row.providerapprovalnumber, 'service_name': row.servicename, 'provider_legal_name': row.providerlegalname, 'service_address': row.serviceaddress, 'suburb': row.suburb, 'state': row.state, 'postcode': row.postcode, 'phone': row.phone, 'fax': row.fax, 'email_address': row.email, 'conditions_on_approval': row.conditionsonapproval, 'number_of_approved_places': row.numberofapprovedplaces, 'overall_rating': row.overallrating, 'type': row.type}
+#         centre = {'id': row.id, 'service_approval_number': row.serviceapprovalnumber, 'provider_approval_number': row.providerapprovalnumber, 'service_name': row.servicename, 'provider_legal_name': row.providerlegalname, 'service_address': row.serviceaddress, 'suburb': row.suburb, 'state': row.state, 'postcode': row.postcode, 'phone': row.phone, 'fax': row.fax, 'email_address': row.email, 'conditions_on_approval': row.conditionsonapproval, 'number_of_approved_places': row.numberofapprovedplaces, 'overall_rating': row.overallrating, 'type': row.type}
         
-    c = canvas.Canvas("centre"+str(id)+".pdf")
-    c.setLineWidth(.3)
-    c.setFont('Helvetica', 12)
+#     c = canvas.Canvas("centre"+str(id)+".pdf")
+#     c.setLineWidth(.3)
+#     c.setFont('Helvetica', 12)
      
-    print(centre)
-    c.drawString(30,750,'Service Name')
-    c.drawString(120,750, centre['service_name'])
-    c.drawString(200, 750, "Email")
-    c.drawString(500,750,centre['email_address'])
-    c.line(480,747,580,747)
+#     print(centre)
+#     c.drawString(30,750,'Service Name')
+#     c.drawString(120,750, centre['service_name'])
+#     c.drawString(200, 750, "Email")
+#     c.drawString(500,750,centre['email_address'])
+#     c.line(480,747,580,747)
      
-    c.drawString(275,725,'Suburb:')
-    c.drawString(500,725, centre['suburb'])
-    c.line(378,723,580,723)
+#     c.drawString(275,725,'Suburb:')
+#     c.drawString(500,725, centre['suburb'])
+#     c.line(378,723,580,723)
      
-    c.drawString(30,703,'State:')
-    c.line(120,700,580,700)
-    c.drawString(120,703, centre['state'])
-    c.save()
+#     c.drawString(30,703,'State:')
+#     c.line(120,700,580,700)
+#     c.drawString(120,703, centre['state'])
+#     c.save()
 
-    return jsonify({'message':'PDF generated'}), 200
+#     return jsonify({'message':'PDF generated'}), 200
    
 
 if __name__ == '__main__':
