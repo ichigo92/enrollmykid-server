@@ -16,38 +16,44 @@ def hello():
 @app.route('/centres', methods=['GET'])
 def get_centres():
 
-    weather_data=[]
+    centres=[]
     rows = session.execute("SELECT * FROM enrollmykid.centres LIMIT 10")
     for row in rows:
-        weather = {'id': row.id, 'service_approval_number': row.serviceapprovalnumber, 'provider_approval_number': row.providerapprovalnumber, 'service_name': row.servicename, 'provider_legal_name': row.providerlegalname, 'service_address': row.serviceaddress, 'suburb': row.suburb, 'state': row.state, 'postcode': row.postcode, 'phone': row.phone, 'fax': row.fax, 'email_address': row.emailaddress, 'conditions_on_approval': row.conditionsonapproval, 'number_of_approved_place': row.numberofapprovedplaces, 'overall_rating': row.overallrating, 'type': row.type}
+        centre = {'id': row.id, 'service_approval_number': row.serviceapprovalnumber, 'provider_approval_number': row.providerapprovalnumber, 'service_name': row.servicename, 'provider_legal_name': row.providerlegalname, 'service_address': row.serviceaddress, 'suburb': row.suburb, 'state': row.state, 'postcode': row.postcode, 'phone': row.phone, 'fax': row.fax, 'email_address': row.email, 'conditions_on_approval': row.conditionsonapproval, 'number_of_approved_place': row.numberofapprovedplaces, 'overall_rating': row.overallrating, 'type': row.type}
         
-        weather_data.append(weather)
-    return jsonify(weather_data)
+        centres.append(centre)
+    return jsonify(centres)
 
 @app.route('/centres/<int:id>', methods=['GET'])
 def get_centre_by_id(id):
 
-    weather_data=[]
+    centres=[]
     rows = session.execute("""SELECT * FROM enrollmykid.centres WHERE id=%(id)s""",{'id': id})
     for row in rows:
 
-        weather = {'id': row.id, 'service_approval_number': row.serviceapprovalnumber, 'provider_approval_number': row.providerapprovalnumber, 'service_name': row.servicename, 'provider_legal_name': row.providerlegalname, 'service_address': row.serviceaddress, 'suburb': row.suburb, 'state': row.state, 'postcode': row.postcode, 'phone': row.phone, 'fax': row.fax, 'email_address': row.emailaddress, 'conditions_on_approval': row.conditionsonapproval, 'number_of_approved_place': row.numberofapprovedplaces, 'overall_rating': row.overallrating, 'type': row.type}
+        centre = {'id': row.id, 'service_approval_number': row.serviceapprovalnumber, 'provider_approval_number': row.providerapprovalnumber, 'service_name': row.servicename, 'provider_legal_name': row.providerlegalname, 'service_address': row.serviceaddress, 'suburb': row.suburb, 'state': row.state, 'postcode': row.postcode, 'phone': row.phone, 'fax': row.fax, 'email_address': row.email, 'conditions_on_approval': row.conditionsonapproval, 'number_of_approved_place': row.numberofapprovedplaces, 'overall_rating': row.overallrating, 'type': row.type}
         
-        weather_data.append(weather)
+        centres.append(centre)
 
-    return jsonify(weather_data)
+    return jsonify(centres)
 
 @app.route('/centres', methods=['POST'])
 def create_centre():
 
-    rows = session.execute("INSERT INTO enrollmykid.centres(id, ServiceApprovalNumber, ProviderApprovalNumber, ServiceName, ProviderLegalName, ServiceAddress, Suburb, State, Postcode, Phone, Fax, EmailAddress, ConditionsOnApproval, NumberOfApprovedPlaces, OverallRating, Type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (7,request.form['ServiceApprovalNumber'], "Vancouver", 14.7, "dark clouds", "02n", ))
+    count_rows = session.execute("SELECT COUNT(*) FROM enrollmykid.centres")
+
+    for c in count_rows:
+        last_id = c.count
+    last_id += 1
+
+    rows = session.execute("INSERT INTO enrollmykid.centres(id, ServiceApprovalNumber, ProviderApprovalNumber, ServiceName, ProviderLegalName, ServiceAddress, Suburb, State, Postcode, Phone, Fax, EmailAddress, ConditionsOnApproval, NumberOfApprovedPlaces, OverallRating, Type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (last_id,request.form['serviceApprovalNumber'], request.form['providerApprovalNumber'], request.form['serviceName'], request.form['providerLegalName'], request.form['serviceAddress'], request.form['suburb'], request.form['state'], request.form['postcode'], request.form['phone'], request.form['Fax'], request.form['email'], request.form['conditionsOnApproval'], request.form['numberOfApprovedPlaces'], request.form['overallRating'], request.form['type'] ))
 
     return jsonify({'message':'new record created'})
 
 @app.route('/centres/<int:id>', methods = ['PUT'])
 def update_ccentre(id):
 
-    rows = session.execute("""UPDATE enrollmykid.centres SET EmailAddress=%(emailaddress)s WHERE id=%(id)s""", {'name': request.form['city'], 'id': id})
+    rows = session.execute("""UPDATE enrollmykid.centres SET emailaddress=%(email)s WHERE id=%(id)s""", {'email': request.form['email'], 'id': id})
     print(rows,file=sys.stderr)
 
     return jsonify({'message':'updated successfully'})
