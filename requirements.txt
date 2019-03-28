@@ -2,3 +2,4 @@ pip
 Flask
 cassandra-driver
 requests
+reportlab
