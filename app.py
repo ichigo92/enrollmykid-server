@@ -5,8 +5,8 @@ import sys
 
 from reportlab.pdfgen import canvas
 
-#cluster = Cluster(['cassandra'])
-cluster = Cluster(['127.0.0.1'])
+cluster = Cluster(['cassandra'])
+#cluster = Cluster(['127.0.0.1'])
 session = cluster.connect()
 
 app = Flask(__name__)
