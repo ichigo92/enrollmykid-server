@@ -112,7 +112,6 @@ def get_weather():
     if resp.ok:
         # print(resp.json())
 
-        print(data, file=sys.stderr)
 
         res = resp.json()
 
