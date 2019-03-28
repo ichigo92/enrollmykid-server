@@ -102,7 +102,7 @@ def delete_centre(id):
 #     return jsonify({'message':'PDF generated'}), 200
 
 
-@app.route('/weather/<string:city>', methods=['GET'])
+@app.route('/weather', methods=['GET'])
 def get_weather():
     
     weather_url = base_url.format(city = 'London', units = 'metric', API_KEY = API_KEY)
