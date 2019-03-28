@@ -11,6 +11,11 @@ session = cluster.connect()
 
 app = Flask(__name__)
 
+
+API_KEY = '5cbb13c2517ad300c52fa1806fd7d94f'
+
+base_url = 'http://api.openweathermap.org/data/2.5/weather?q={city}&units={units}&APPID={API_KEY}'
+
 @app.route('/')
 def hello():
     name = request.args.get('name', 'World')
@@ -95,7 +100,30 @@ def delete_centre(id):
 #     c.save()
 
 #     return jsonify({'message':'PDF generated'}), 200
-   
+
+
+@app.route('/weather/<string:city>', methods=['GET'])
+def get_weather():
+    
+    weather_url = base_url.format(city = 'London', units = 'metric', API_KEY = API_KEY)
+
+    resp = requests.get(weather_url)
+
+    if resp.ok:
+        # print(resp.json())
+
+        print(data, file=sys.stderr)
+
+        res = resp.json()
+
+        weather = {
+            'temperature': res['main']['temp'],
+            'icon' : res['weather'][0]['icon']
+        }
+
+        return jsonify(weather), resp.status_code
+    else:
+        return resp.reason
 
 if __name__ == '__main__':
         app.run(host='0.0.0.0', port=8080)
