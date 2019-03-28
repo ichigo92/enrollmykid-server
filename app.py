@@ -46,7 +46,7 @@ def create_centre():
         last_id = c.count
     last_id += 1
 
-    rows = session.execute("INSERT INTO enrollmykid.centres(id, ServiceApprovalNumber, ProviderApprovalNumber, ServiceName, ProviderLegalName, ServiceAddress, Suburb, State, Postcode, Phone, Fax, Email, ConditionsOnApproval, NumberOfApprovedPlaces, OverallRating, Type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (last_id,request.form['serviceApprovalNumber'], request.form['providerApprovalNumber'], request.form['serviceName'], request.form['providerLegalName'], request.form['serviceAddress'], request.form['suburb'], request.form['state'], int(request.form['postcode']), request.form['phone'], request.form['Fax'], request.form['email'], request.form['conditionsOnApproval'], request.form['numberOfApprovedPlaces'], request.form['overallRating'], request.form['type'] ))
+    rows = session.execute("INSERT INTO enrollmykid.centres(id, ServiceApprovalNumber, ProviderApprovalNumber, ServiceName, ProviderLegalName, ServiceAddress, Suburb, State, Postcode, Phone, Fax, Email, ConditionsOnApproval, NumberOfApprovedPlaces, OverallRating, Type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (last_id,request.form['serviceApprovalNumber'], request.form['providerApprovalNumber'], request.form['serviceName'], request.form['providerLegalName'], request.form['serviceAddress'], request.form['suburb'], request.form['state'], int(request.form['postcode']), request.form['phone'], request.form['Fax'], request.form['email'], request.form['conditionsOnApproval'], int(request.form['numberOfApprovedPlaces']), request.form['overallRating'], request.form['type'] ))
 
     return jsonify({'message':'new record created'})
 
