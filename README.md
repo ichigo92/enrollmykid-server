@@ -34,7 +34,7 @@ Enrollmykid requires [Flask](http://flask.pocoo.org/) to run.
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-$ cd dillinger
+$ cd enrollmykid-server
 $ pyton -m pip install -U -r requirements.txt
 $ python app.py
 ```
