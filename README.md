@@ -4,6 +4,8 @@
 
 Enrollmykid is a cloud-enabled, mobile-ready, offline-storage, Python powered application
 
+**Client** is available at [https://github.com/ichigo92/enrollmykid-client](https://github.com/ichigo92/enrollmykid-client)
+
 # Features!
 
   - Add a Childcare Centre
@@ -15,7 +17,6 @@ Enrollmykid is a cloud-enabled, mobile-ready, offline-storage, Python powered ap
 You can also:
   - Export centre details as PDF (still in progress)
 
-Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site][df1]
 
 ### Tech
 
@@ -23,7 +24,6 @@ Enrollmykid uses a number of open source projects to work properly:
 
 * [Python] - HTML enhanced for web apps!
 * [Sublime] - awesome text editor
-* [markdown-it] - Markdown parser done right. Fast and easy to extend.
 * [Bootstrap] - great UI boilerplate for modern web apps
 
 
@@ -35,7 +35,7 @@ Install the dependencies and devDependencies and start the server.
 
 ```sh
 $ cd enrollmykid-server
-$ pyton -m pip install -U -r requirements.txt
+$ python -m pip install -U -r requirements.txt
 $ python app.py
 ```
 
