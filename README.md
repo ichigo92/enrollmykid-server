@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-Enrollmykid is a cloud-enabled, mobile-ready, offline-storage, Python powered application
+Enrollmykid is a cloud-enabled, mobile-ready, Python powered application
 
 **Client** is available at [https://github.com/ichigo92/enrollmykid-client](https://github.com/ichigo92/enrollmykid-client)
 
